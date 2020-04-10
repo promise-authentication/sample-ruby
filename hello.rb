@@ -1,5 +1,5 @@
 require 'sinatra'
 
 get '/authenticate' do
-    "Hello World!"
+  "Hello, there World!"
 end

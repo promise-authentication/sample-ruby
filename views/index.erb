@@ -5,7 +5,7 @@
   </head>
   <body>
     <% pre_classes = "my-4 p-2 border overflow-x-scroll rounded bg-gray-100" %>
-    <div class="max-w-xl m-auto py-8 px-4">
+    <div class="max-w-2xl m-auto py-8 px-4">
       <p>
         OK, welcome to the Ruby Sample app for Promise Authentication.
       </p>
@@ -13,6 +13,9 @@
         The id_token you came with has the following content:
       </p>
       <pre class="<%= pre_classes %>">payload = <%= JSON.pretty_generate payload %></pre>
+      <p>
+        That means you should be identified by the following string <span class="font-mono"><%= user_id %></span>
+      </p>
       <p class="mt-4">
         And this header:
       </p>
@@ -25,9 +28,14 @@
         Now, this can be used to verify that the token is actually issued by <span class="font-mono"><%= payload['iss'] %></span>
       </p>
 
-<pre class="<%= pre_classes %>">jwk = jwks["keys"].first
+      <pre class="<%= pre_classes %>">jwk = jwks["keys"].first
 key = JSON::JWK.new(jwk).to_key
 decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
+
+      <p>
+        Check out the full <a class="underline" href="https://github.com/promise-authentication/sample-ruby">source on GitHub</a> 
+
+      </p>
 
     </div>
 

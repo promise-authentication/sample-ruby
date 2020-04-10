@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <% pre_classes = "my-4 p-2 border overflow-x-scroll rounded bg-gray-100" %>
+    <div class="max-w-xl m-auto py-8 px-4">
+      <p>
+        OK, welcome to the Ruby Sample app for Promise Authentication.
+      </p>
+      <p class="mt-4">
+        The id_token you came with has the following content:
+      </p>
+      <pre class="<%= pre_classes %>">payload = <%= JSON.pretty_generate payload %></pre>
+      <p class="mt-4">
+        And this header:
+      </p>
+      <pre class="<%= pre_classes %>">header = <%= JSON.pretty_generate header %></pre>
+      <p>
+        Fetching the public key from <span class="font-mono"><%= jwks_url %></span> yields:
+      </p>
+      <pre class="<%= pre_classes %>">jwks = <%= JSON.pretty_generate jwks %></pre>
+      <p>
+        Now, this can be used to verify that the token is actually issued by <span class="font-mono"><%= payload['iss'] %></span>
+      </p>
+
+<pre class="<%= pre_classes %>">jwk = jwks["keys"].first
+key = JSON::JWK.new(jwk).to_key
+decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
+
+    </div>
+
+  </body>
+
+</html>

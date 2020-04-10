@@ -12,15 +12,21 @@ get '/' do
 end
 
 get '/authenticate' do
-  string = params[:id_token]
-  if string
+  error = nil
+
+  begin
+    string = params[:id_token]
     payload, header = JWT.decode(string , nil, false)
     jwks_url = "https://#{payload['iss']}/.well-known/jwks.json"
     jwks = JSON.parse(HTTParty.get(jwks_url).body)
 
     jwk = jwks["keys"].first
     key = JSON::JWK.new(jwk).to_key
-    decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }
+    begin
+      decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }
+    rescue => e
+      error = e
+    end
 
     user_id = [payload['iss'], payload['sub']].join('|')
 
@@ -30,9 +36,11 @@ get '/authenticate' do
       jwks_url: jwks_url,
       jwks: jwks,
       decoded_token: decoded_token,
-      user_id: user_id
+      user_id: user_id,
+      error: error
     }
-  else
-    erb :go_on
+  rescue => e
+    error = e
+    erb :go_on, locals: { error: error }
   end
 end

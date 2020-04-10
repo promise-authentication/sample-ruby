@@ -32,9 +32,22 @@
 key = JSON::JWK.new(jwk).to_key
 decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
 
-      <p>
-        Check out the full <a class="underline" href="https://github.com/promise-authentication/sample-ruby">source on GitHub</a> 
+      <% if error %>
+        <p class="rounded bg-red-400 text-white text-center p-8" >
+          Verification failed with <%= error.class %>
+        </p>
+      <% else %>
+        <p class="rounded bg-green-400 text-white text-center p-8" >
+          And it went well! You are verified! 🎉
+        </p>
+      <% end %>
 
+      <p class="mt-4">
+        Check out the <a class="underline" href="https://github.com/promise-authentication/sample-ruby">source on GitHub</a> for this site.
+      </p>
+
+      <p class="mt-2">
+        <a href="https://promiseauthentication.org/ruby.promiseauthentication.org/login" class="underline">Login again</a>
       </p>
 
     </div>

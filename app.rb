@@ -8,7 +8,7 @@ require 'net/https'
 require 'httparty'
 
 get '/' do
-  erb :go_on
+  erb :go_on, locals: { error: nil }
 end
 
 get '/authenticate' do

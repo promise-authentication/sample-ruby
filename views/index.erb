@@ -34,7 +34,7 @@ decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
 
       <% if error %>
         <p class="rounded bg-red-400 text-white text-center p-8" >
-          Verification failed with <%= error.class %> ✋
+          Verification failed with <%= error.class %>
         </p>
       <% else %>
         <p class="rounded bg-green-400 text-white text-center p-8" >

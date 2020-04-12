@@ -14,14 +14,19 @@
       </p>
       <pre class="<%= pre_classes %>">payload = <%= JSON.pretty_generate payload %></pre>
       <p>
-        That means you should be identified by the following string <span class="font-mono"><%= user_id %></span>
+        That means you should be identified by the following string
       </p>
+      <pre class="<%= pre_classes %>"><%= user_id %></pre>
       <p class="mt-4">
-        And this header:
+        The header of the JWT token looks like this:
       </p>
       <pre class="<%= pre_classes %>">header = <%= JSON.pretty_generate header %></pre>
       <p>
-        Fetching the public key from <span class="font-mono"><%= jwks_url %></span> yields:
+        Fetching the public key from
+      </p>
+      <pre class="<%= pre_classes %>"><%= jwks_url %></pre>
+      <p>
+        yeilds
       </p>
       <pre class="<%= pre_classes %>">jwks = <%= JSON.pretty_generate jwks %></pre>
       <p>

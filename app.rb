@@ -44,3 +44,10 @@ get '/authenticate' do
     erb :go_on, locals: { error: error }
   end
 end
+
+get '/.well-known/authentication.json' do
+  content_type 'application/json'
+  {
+    name: 'Ruby Sample'
+  }.to_json
+end

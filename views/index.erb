@@ -6,9 +6,22 @@
   <body>
     <% pre_classes = "my-4 p-2 border overflow-x-scroll rounded bg-gray-100" %>
     <div class="max-w-2xl m-auto py-8 px-4">
-      <p>
-        OK, welcome to the Ruby Sample app for Promise Authentication.
+      <h1 class="text-2xl font-black mb-10">
+        Ruby App
+      </h1>
+      <p class="mb-4">
+        OK, welcome to Ruby App. A sample app for Promise Authentication.
       </p>
+      <% if error %>
+        <p class="rounded bg-red-400 text-white text-center p-8" >
+          Verification failed with <%= error.class %>
+        </p>
+      <% else %>
+        <p class="rounded bg-green-400 text-white text-center p-8" >
+          You are logged in! 🎉
+        </p>
+      <% end %>
+
       <p class="mt-4">
         The id_token you came with has the following content:
       </p>
@@ -36,16 +49,6 @@
       <pre class="<%= pre_classes %>">jwk = jwks["keys"].first
 key = JSON::JWK.new(jwk).to_key
 decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
-
-      <% if error %>
-        <p class="rounded bg-red-400 text-white text-center p-8" >
-          Verification failed with <%= error.class %>
-        </p>
-      <% else %>
-        <p class="rounded bg-green-400 text-white text-center p-8" >
-          And it went well! You are verified! 🎉
-        </p>
-      <% end %>
 
       <p class="mt-4">
         Check out the <a class="underline" href="https://github.com/promise-authentication/sample-ruby">source on GitHub</a> for this site.

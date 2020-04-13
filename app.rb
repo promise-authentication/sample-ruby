@@ -48,6 +48,7 @@ end
 get '/.well-known/authentication.json' do
   content_type 'application/json'
   {
-    name: 'Ruby Sample'
+    name: 'Ruby Sample',
+    logo_url: 'http://pngimg.com/uploads/ruby/ruby_PNG47.png'
   }.to_json
 end

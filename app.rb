@@ -45,7 +45,7 @@ get '/authenticate' do
   end
 end
 
-get '/.well-known/authentication.json' do
+get '/.well-known/promise.json' do
   content_type 'application/json'
   {
     name: 'Ruby App',

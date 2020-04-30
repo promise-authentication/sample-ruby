@@ -56,7 +56,7 @@ decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
       </p>
 
       <p class="mt-2">
-        <a href="https://promiseauthentication.org/a/ruby.promiseauthentication.org" class="underline">Login again</a>
+        <a href="https://promiseauthentication.org/a/ruby.promiseauthentication.org?nonce=<%= SecureRandom.uuid %>" class="inline-block mt-8 px-8 py-4 bg-green-600 text-white rounded">Login again</a>
       </p>
 
       <p class="mt-2">

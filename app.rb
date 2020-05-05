@@ -46,6 +46,7 @@ get '/authenticate' do
 end
 
 get '/.well-known/promise.json' do
+  etag ENV['HEROKU_SLUG_COMMIT'] || SecureRandom.uuid
   content_type 'application/json'
   {
     name: 'Ruby App',

@@ -54,7 +54,8 @@ get '/.well-known/promise.json' do
     logo_url: 'https://pngimg.com/uploads/ruby/ruby_PNG47.png',
     locale: 'en',
     admin_user_ids: [
-      "709db7b8-961a-4295-a1a4-a81072b38014"
+      "709db7b8-961a-4295-a1a4-a81072b38014", # Anders localhost
+      "e739bb0c-7d19-472d-aaf2-f96e1cfc71cc" # Anders production
     ]
   }.to_json
 end

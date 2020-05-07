@@ -52,6 +52,9 @@ get '/.well-known/promise.json' do
   {
     name: 'Ruby App',
     logo_url: 'https://pngimg.com/uploads/ruby/ruby_PNG47.png',
-    locale: 'en'
+    locale: 'en',
+    admin_user_ids: [
+      "709db7b8-961a-4295-a1a4-a81072b38014"
+    ]
   }.to_json
 end

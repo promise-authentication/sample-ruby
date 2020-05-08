@@ -17,7 +17,7 @@ get '/authenticate' do
   begin
     string = params[:id_token]
     payload, header = JWT.decode(string , nil, false)
-    jwks_url = "https://#{payload['iss']}/.well-known/jwks.json"
+    jwks_url = "#{payload['iss']}/.well-known/jwks.json"
     jwks = JSON.parse(HTTParty.get(jwks_url).body)
 
     jwk = jwks["keys"].first

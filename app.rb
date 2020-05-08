@@ -48,6 +48,7 @@ end
 get '/.well-known/promise.json' do
   etag ENV['HEROKU_SLUG_COMMIT'] || SecureRandom.uuid
   expires 60*5 # minutes
+  cache_control :public, :must_revalidate, :max_age => 60*5 # 5 minutes
   content_type 'application/json'
   {
     name: 'Ruby App',

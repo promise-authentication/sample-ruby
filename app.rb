@@ -56,7 +56,7 @@ get '/.well-known/promise.json' do
     locale: 'en',
     admin_user_ids: [
       "c8189582-e3c1-4fcf-97a6-ee9649d10c61", # Anders localhost
-      "e739bb0c-7d19-472d-aaf2-f96e1cfc71cc" # Anders production
+      "b9719941-f84c-4c53-bbdd-968fb408ac68" # Anders production
     ]
   }.to_json
 end

@@ -20,10 +20,10 @@ get '/authenticate' do
 
     decoded_token = nil
     jwks["keys"].each do |jwk|
+      break if decoded_token
       key = JSON::JWK.new(jwk).to_key
       begin
         decoded_token = JSON::JWT.decode string, key
-        error = nil
       rescue => e
         error = e
       end

@@ -47,10 +47,6 @@
         Now, this can be used to verify that the token is actually issued by <span class="font-mono"><%= payload['iss'] %></span>
       </p>
 
-      <pre class="<%= pre_classes %>">jwk = jwks["keys"].first
-key = JSON::JWK.new(jwk).to_key
-decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }</pre>
-
       <p class="mt-4">
         Check out the <a class="underline" href="https://github.com/promise-authentication/sample-ruby">source on GitHub</a> for this site.
       </p>

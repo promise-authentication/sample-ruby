@@ -16,14 +16,16 @@ get '/authenticate' do
     string = params[:id_token]
     payload, header = JSON::JWT.decode(string , :skip_verification)
     jwks_url = "#{payload['iss']}/.well-known/jwks.json"
-    jwks = JSON.parse(HTTParty.get(jwks_url).body)
 
-    jwk = jwks["keys"].first
-    key = JSON::JWK.new(jwk).to_key
-    begin
-      decoded_token = JSON::JWT.decode string, key
-    rescue => e
-      error = e
+    decoded_token = nil
+    jwks["keys"].each do |jwk|
+      key = JSON::JWK.new(jwk).to_key
+      begin
+        decoded_token = JSON::JWT.decode string, key
+        error = nil
+      rescue => e
+        error = e
+      end
     end
 
     user_id = [payload['iss'], payload['sub']].join('|')

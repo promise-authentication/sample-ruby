@@ -48,7 +48,7 @@ get '/.well-known/promise.json' do
   cache_control :public, :must_revalidate, :max_age => 60*5 # 5 minutes
   content_type 'application/json'
   {
-    name: 'Ruby App',
+    name: 'Sample Ruby App',
     logo_url: 'https://pngimg.com/uploads/ruby/ruby_PNG47.png',
     locale: 'en',
     admin_user_ids: [

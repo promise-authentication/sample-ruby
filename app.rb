@@ -14,7 +14,7 @@ get '/authenticate' do
 
   begin
     string = params[:id_token]
-    payload, header = JSON::JWT.decode(string , :skip_verification)
+    payload = JSON::JWT.decode(string , :skip_verification)
     jwks_url = "#{payload['iss']}/.well-known/jwks.json"
     jwks = JSON.parse(HTTParty.get(jwks_url).body)
 
@@ -33,7 +33,7 @@ get '/authenticate' do
 
     erb :index, locals: {
       payload: payload,
-      header: header,
+      header: payload.header,
       jwks_url: jwks_url,
       jwks: jwks,
       decoded_token: decoded_token,

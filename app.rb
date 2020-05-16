@@ -1,8 +1,6 @@
 require 'sinatra'
 require "sinatra/reloader" if development?
 
-require 'json'
-require 'jwt'
 require 'json/jwt'
 require 'net/https'
 require 'httparty'
@@ -16,14 +14,14 @@ get '/authenticate' do
 
   begin
     string = params[:id_token]
-    payload, header = JWT.decode(string , nil, false)
+    payload, header = JSON::JWT.decode(string , :skip_verification)
     jwks_url = "#{payload['iss']}/.well-known/jwks.json"
     jwks = JSON.parse(HTTParty.get(jwks_url).body)
 
     jwk = jwks["keys"].first
     key = JSON::JWK.new(jwk).to_key
     begin
-      decoded_token = JWT.decode string, key, true, { algorithm: header['alg'] }
+      decoded_token = JSON::JWT.decode string, key
     rescue => e
       error = e
     end

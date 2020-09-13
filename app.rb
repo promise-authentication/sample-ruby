@@ -1,12 +1,24 @@
 require 'sinatra'
+require 'sinatra/cookies'
 require "sinatra/reloader" if development?
 
 require 'json/jwt'
 require 'net/https'
 require 'httparty'
 
+class NonceNotMatching < StandardError ; end
+
 get '/' do
-  erb :go_on, locals: { error: nil }
+  render_go_on
+end
+
+def render_go_on(error = nil)
+  cookies[:nonce] = SecureRandom.uuid
+
+  erb :go_on, locals: {
+    error: error,
+    href: "https://promiseauthentication.org/a/ruby.promiseauthentication.org?nonce=#{ cookies[:nonce] }" 
+  }
 end
 
 get '/authenticate' do
@@ -31,8 +43,12 @@ get '/authenticate' do
 
     user_id = [payload['iss'], payload['sub']].join('|')
 
+    nonce = payload['nonce']
+    error ||= NonceNotMatching.new("Nonce in id_token is not matching the nonce from the authentication request.") if nonce != cookies[:nonce]
+
     erb :index, locals: {
       payload: payload,
+      nonce: nonce,
       header: payload.header,
       jwks_url: jwks_url,
       jwks: jwks,
@@ -41,8 +57,7 @@ get '/authenticate' do
       error: error
     }
   rescue => e
-    error = e
-    erb :go_on, locals: { error: error }
+    render_go_on(e)
   end
 end
 
@@ -51,8 +66,8 @@ get '/.well-known/promise.json' do
   cache_control :public, :must_revalidate, :max_age => 60*5 # 5 minutes
   content_type 'application/json'
   {
-    name: 'Sample Ruby App',
-    logo_url: 'https://pngimg.com/uploads/ruby/ruby_PNG47.png',
+    name: 'Sandbox',
+    logo_url: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Minimalist_Sandbox_Icon.png',
     locale: 'en',
     admin_user_ids: [
       "c8189582-e3c1-4fcf-97a6-ee9649d10c61", # Anders localhost

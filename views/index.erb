@@ -4,18 +4,17 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body>
-    <% pre_classes = "my-4 p-2 border overflow-x-scroll rounded bg-gray-100" %>
-    <div class="max-w-2xl m-auto py-8 px-4 mb-24">
-      <img src="http://pngimg.com/uploads/ruby/ruby_PNG47.png" class="h-12" />
-      <h1 class="text-2xl font-black mb-10">
-        Ruby App
+    <% pre_classes = "p-2 border overflow-x-scroll rounded bg-gray-100" %>
+    <div class="max-w-2xl m-auto py-8 px-4 mb-24 space-y-4">
+      <h1 class="text-6xl font-black mb-10 tracking-tight">
+        Promise Sandbox
       </h1>
-      <p class="mb-4">
-        OK, welcome to Ruby App. A sample app for Promise Authentication.
+      <p>
+        Welcome back.
       </p>
       <% if error %>
         <p class="rounded bg-red-400 text-white text-center p-8" >
-          Verification failed with <%= error.class %>
+          Verification failed: <%= error.to_s %>
         </p>
       <% else %>
         <p class="rounded bg-green-400 text-white text-center p-8" >
@@ -23,41 +22,54 @@
         </p>
       <% end %>
 
-      <p class="mt-4">
-        The id_token you came with has the following content:
+      <p class="">
+        As per the OpenID Connect specificatin, the <code>id_token</code> you came with has the following content:
       </p>
-      <pre class="<%= pre_classes %>">payload = <%= JSON.pretty_generate payload %></pre>
-      <pre class="<%= pre_classes %>">header = <%= JSON.pretty_generate header %></pre>
+      <pre class="<%= pre_classes %>"><%= JSON.pretty_generate payload %></pre>
       <p>
-        That means you should be identified by the following string
+        This comes in the form of a signed JWT which must be read and verified by the relying party.
+        Libraries exists to help with this. You can find an extensive list on <a href="https://jwt.io/#libraries-io">jwt.io</a>. This site uses the Ruby gem <a href="https://github.com/nov/json-jwt"><code>json-jwt</code></a> written by <a href="https://github.com/nov">Nov Matake</a>.
+      </p>
+      <h2 class="font-bold text-2xl pt-8">
+        User ID
+      </h2>
+      <p>
+        According to the Promise protocol, you should be identified by a concatenation of the <code>iss</code> and the <code>sub</code> claims from the <code>id_token</code>. For example:
       </p>
       <pre class="<%= pre_classes %>"><%= user_id %></pre>
-      <p class="mt-4">
-        The header of the JWT token looks like this:
+      <h2 class="font-bold text-2xl pt-8">
+        Verification of the <code>id_token</code>
+      </h2>
+      <p class="">
+        The <code>id_token</code> is signed by Promise using ECDSA signature algorithm using SHA-512 hash algorithm <code>ES512</code>.
       </p>
-      <pre class="<%= pre_classes %>">header = <%= JSON.pretty_generate header %></pre>
       <p>
-        Fetching the public key from
+        To verify the signature you will need the the public key from
       </p>
       <pre class="<%= pre_classes %>"><%= jwks_url %></pre>
       <p>
-        yeilds
+        In this moment, these are the keys:
       </p>
-      <pre class="<%= pre_classes %>">jwks = <%= JSON.pretty_generate jwks %></pre>
+      <pre class="<%= pre_classes %>"><%= JSON.pretty_generate jwks %></pre>
       <p>
-        Now, this can be used to verify that the token is actually issued by <span class="font-mono"><%= payload['iss'] %></span>
+        Now, you can use you preffered JWT library to verify, that the <code>id_token</code> was in fact issued by <code><%= payload['iss'] %></code>.
       </p>
 
-      <p class="mt-4">
+      <p>
+        That's it.
+      </p>
+
+      <h2 class="font-bold text-2xl pt-8">
+        Further reading
+      </h2>
+      <p class="">
         Check out the <a class="underline" href="https://github.com/promise-authentication/sample-ruby">source on GitHub</a> for this site.
       </p>
-
-      <p class="mt-2">
-        <a href="https://promiseauthentication.org/a/ruby.promiseauthentication.org?nonce=<%= SecureRandom.uuid %>" class="inline-block mt-8 px-8 py-4 bg-green-600 text-white rounded">Login again</a>
+      <p class="">
+        <a href="http://ruby.promiseauthentication.org/.well-known/promise.json" class="underline">Check out the Sandbox configuration for Promise</a>
       </p>
-
-      <p class="mt-2">
-        <a href="https://ruby.promiseauthentication.org/.well-known/promise.json" class="underline">Chech out the configuration for Promise</a>
+      <p class="">
+        <a href="/" class="inline-block px-8 py-4 bg-green-600 text-white rounded">Login again</a>
       </p>
     </div>
   </body>

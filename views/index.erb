@@ -15,6 +15,7 @@
       <% if error %>
         <p class="rounded bg-red-400 text-white text-center p-8" >
           Verification failed: <%= error.to_s %>
+          <a href="/" class="underline">Try signing in again</a>
         </p>
       <% else %>
         <p class="text-center p-12 text-4xl leading-normal font-black" >

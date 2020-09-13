@@ -4,18 +4,25 @@
     <link href="https://unpkg.com/tailwindcss@1.8.7/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body>
+    <div class="flex items-center justify-between w-screen p-4">
+      <div class="flex items-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Minimalist_Sandbox_Icon.png" class="h-12" />
+        <span class="font-black text-2xl pl-3">Sandbox</span>
+      </div>
+      <div>
+        <a href="<%= href %>" class="px-8 py-4 bg-green-600 text-white rounded">Login</a>
+      </div>
+    </div>
     <div class="max-w-2xl m-auto py-8 px-4 space-y-4">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Minimalist_Sandbox_Icon.png" class="h-12" />
-      <h1 class="text-6xl font-black mb-10 tracking-tight">
-        Sandbox
-      </h1>
       <% if error %>
         <p class="rounded bg-red-400 text-white text-center p-8 mb-10" >
           Verification failed: <%= error.to_s %>
         </p>
       <% end %>
+      <p class="text-center">
+      </p>
       <p class="">
-        Welcome to the Sandbox app that shows how to integrate with <a class="font-bold" href="https://promiseauthentication.org">Promise</a>.
+        This is a an app that shows how to integrate with <a class="font-bold" href="https://promiseauthentication.org">Promise</a>.
       </p>
       <p>
         <strong>Promise</strong> uses a simplified version of the Implicit Flow in OpenID Connect.
@@ -26,9 +33,11 @@
       <% pre_classes = "my-4 p-2 border overflow-x-scroll rounded bg-gray-100" %>
       <pre class="<%= pre_classes %>"><%= href %></pre>
       <p>
-        That is what happens when you click the button. Go ahead.
+        That is what happens when you click the green button. Go ahead.
       </p>
-      <a href="<%= href %>" class="inline-block mt-8 px-8 py-4 bg-green-600 text-white rounded">Login</a>
+      <p class="pt-10">
+        <a href="<%= href %>" class="px-8 py-4 bg-green-600 text-white rounded">Login</a>
+      </p>
     </div>
   </body>
 </html>

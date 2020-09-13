@@ -5,24 +5,29 @@
   </head>
   <body>
     <% pre_classes = "p-2 border overflow-x-scroll rounded bg-gray-100" %>
+    <div class="flex items-center justify-between w-screen p-4">
+      <div class="flex items-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Minimalist_Sandbox_Icon.png" class="h-12" />
+        <span class="font-black text-2xl pl-3">Sandbox</span>
+      </div>
+    </div>
     <div class="max-w-2xl m-auto py-8 px-4 mb-24 space-y-4">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Minimalist_Sandbox_Icon.png" class="h-12" />
-      <h1 class="text-6xl font-black mb-10 tracking-tight">
-        Sandbox
-      </h1>
-      <p>
-        Welcome back.
-      </p>
       <% if error %>
         <p class="rounded bg-red-400 text-white text-center p-8" >
           Verification failed: <%= error.to_s %>
         </p>
       <% else %>
-        <p class="rounded bg-green-400 text-white text-center p-8" >
-          You are logged in! 🎉
+        <p class="text-center p-12 text-4xl leading-normal font-black" >
+          👋 Welcome back.<br />You are logged in! 🎉
         </p>
       <% end %>
+      <p>
+        <a href="https://promiseauthentication.org" class="inline-block p-3 bg-green-600 shadow text-white rounded">Go back to Promise &rarr;</a> or read on about the technical parts of the integration.
+      </p>
 
+      <h2 class="font-bold text-2xl pt-8">
+        <code>id_token</code>
+      </h2>
       <p class="">
         As per the OpenID Connect specificatin, the <code>id_token</code> you came with has the following content:
       </p>
@@ -69,8 +74,12 @@
       <p class="">
         <a href="http://ruby.promiseauthentication.org/.well-known/promise.json" class="underline">Check out the Sandbox configuration for Promise</a>
       </p>
+      <p>
+        <a href="https://promiseauthentication.org" class="inline-block p-3 bg-green-600 shadow text-white rounded">Go back to Promise &rarr;</a>
+      </p>
       <p class="">
-        <a href="/" class="inline-block px-8 py-4 bg-green-600 text-white rounded">Login again</a>
+        or
+        <a href="/" class="underline">Try signing in again</a>
       </p>
     </div>
   </body>

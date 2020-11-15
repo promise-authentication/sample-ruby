@@ -1,6 +1,6 @@
 <html>
   <head>
-    <meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content= "width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
       * {
@@ -35,12 +35,12 @@
         <code>id_token</code>
       </h2>
       <p class="">
-        As per the OpenID Connect specificatin, the <code>id_token</code> you came with has the following content:
+        As per the OpenID Connect specification, the <code>id_token</code> you came with has the following content:
       </p>
       <pre class="<%= pre_classes %>"><%= JSON.pretty_generate payload %></pre>
       <p>
         This comes in the form of a signed JWT which must be read and verified by the relying party.
-        Libraries exists to help with this. You can find an extensive list on <a href="https://jwt.io/#libraries-io">jwt.io</a>. This site uses the Ruby gem <a href="https://github.com/nov/json-jwt"><code>json-jwt</code></a> written by <a href="https://github.com/nov">Nov Matake</a>.
+        Libraries exist to help with this. You can find an extensive list on <a href="https://jwt.io/#libraries-io">jwt.io</a>. This site uses the Ruby gem <a href="https://github.com/nov/json-jwt"><code>json-jwt</code></a> written by <a href="https://github.com/nov">Nov Matake</a>.
       </p>
       <h2 class="font-bold text-2xl pt-8">
         User ID
@@ -56,7 +56,7 @@
         The <code>id_token</code> is signed by Promise using ECDSA signature algorithm using SHA-512 hash algorithm <code>ES512</code>.
       </p>
       <p>
-        To verify the signature you will need the the public key from
+        To verify the signature, you will need the public key from
       </p>
       <pre class="<%= pre_classes %>"><%= jwks_url %></pre>
       <p>
@@ -64,7 +64,7 @@
       </p>
       <pre class="<%= pre_classes %>"><%= JSON.pretty_generate jwks %></pre>
       <p>
-        Now, you can use you preffered JWT library to verify, that the <code>id_token</code> was in fact issued by <code><%= payload['iss'] %></code>.
+        Now, you can use your preffered JWT library to verify that the <code>id_token</code> was, in fact, issued by <code><%= payload['iss'] %></code>.
       </p>
 
       <p>
@@ -89,5 +89,4 @@
       </p>
     </div>
   </body>
-
 </html>
